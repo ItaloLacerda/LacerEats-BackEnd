@@ -19,6 +19,40 @@ public class RolesModel {
     @Column(length = 45, nullable = false, unique = true)
     private String role;
 
+    @Column(nullable = false)
+    private Boolean status;
+    
+    public RolesModel() {}
+
+    public RolesModel(Integer id, String role) {
+        this.id = id;
+        this.role = role; 
+    }
+
+    public RolesModel(String role, boolean status) {
+        this.role = role;
+        this.status = status;
+    }
+
+    public RolesModel(Integer id, Boolean status) {
+        this.id = id;
+        this.status = status;
+    }
+
+    public RolesModel(Integer id, String role, Boolean status) {
+        this.id = id;
+        this.role = role;
+        this.status = status;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -28,6 +28,29 @@ public class ProductGroupModel {
     @Column(nullable = false)
     private Boolean status;
 
+    public ProductGroupModel() {}
+
+    public ProductGroupModel(String description, Boolean showInMobile, Boolean showInTerminal, boolean status) {
+        this.description = description;
+        this.showInMobile = showInMobile;
+        this.showInTerminal = showInTerminal;
+        this.status = status;
+    }
+
+    public ProductGroupModel(
+        Integer id,
+        String description,
+        Boolean showInMobile,
+        Boolean showInTerminal,
+        Boolean status) {
+            
+        this.id = id;
+        this.description = description;
+        this.showInMobile = showInMobile;
+        this.showInTerminal = showInTerminal;
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }
