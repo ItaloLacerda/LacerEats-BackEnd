@@ -32,13 +32,13 @@ public class SuppliersModel {
     private String email;
 
     @Column(length = 11, name = "cell_phone", nullable = false)
-    private Integer cellPhone;
+    private Long cellPhone;
 
     @Column(length = 2, name = "state_registration")
     private String stateRegistration;
     
     @Column(length = 14, name = "cnpj", nullable = false, unique = true)
-    private Integer cpnj;
+    private Long cpnj;
 
     @Column(length = 60)
     private String site;
@@ -55,6 +55,54 @@ public class SuppliersModel {
                 joinColumns = @JoinColumn(name = "id_suppliers"),
                 inverseJoinColumns = @JoinColumn(name = "id_product"))
     private Set<ProductModel> products;
+
+    public SuppliersModel() {}
+
+    public SuppliersModel(
+        Integer id,
+        String supplierName,
+        String fantasyName,
+        String email,
+        Long cellPhone,
+        String stateRegistration,
+        Long cpnj,
+        String site,
+        Boolean status,
+        AdressesModel adresses
+        ) {
+            this.id = id;
+            this.supplierName = supplierName;
+            this.fantasyName = fantasyName;
+            this.email = email;
+            this.cellPhone = cellPhone;
+            this.stateRegistration = stateRegistration;
+            this.cpnj = cpnj;
+            this.site = site;
+            this.status = status;
+            this.adresses = adresses;
+    }
+
+    public SuppliersModel(
+        String supplierName,
+        String fantasyName,
+        String email,
+        Long cellPhone,
+        String stateRegistration,
+        Long cpnj,
+        String site,
+        Boolean status,
+        AdressesModel adresses
+        ) {
+            this.supplierName = supplierName;
+            this.fantasyName = fantasyName;
+            this.email = email;
+            this.cellPhone = cellPhone;
+            this.stateRegistration = stateRegistration;
+            this.cpnj = cpnj;
+            this.site = site;
+            this.status = status;
+            this.adresses = adresses;
+    }
 
     public Set<ProductModel> getProducts() {
         return products;
@@ -96,11 +144,11 @@ public class SuppliersModel {
         this.email = email;
     }
 
-    public Integer getCellPhone() {
+    public Long getCellPhone() {
         return cellPhone;
     }
 
-    public void setCellPhone(Integer cellPhone) {
+    public void setCellPhone(Long cellPhone) {
         this.cellPhone = cellPhone;
     }
 
@@ -112,11 +160,11 @@ public class SuppliersModel {
         this.stateRegistration = stateRegistration;
     }
 
-    public Integer getCpnj() {
+    public Long getCpnj() {
         return cpnj;
     }
 
-    public void setCpnj(Integer cpnj) {
+    public void setCpnj(Long cpnj) {
         this.cpnj = cpnj;
     }
 
