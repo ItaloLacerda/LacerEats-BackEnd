@@ -44,7 +44,7 @@ public class CollaboratorsModel {
     @Column(length = 11, 
             name = "cell_phone", 
             nullable = false)
-    private Integer cellPhone;
+    private Long cellPhone;
 
     @Column(name = "dateOfBirth", 
             nullable = false)
@@ -54,7 +54,7 @@ public class CollaboratorsModel {
             name = "cpf", 
             nullable = false, 
             unique = true)
-    private Integer cpf;
+    private Long cpf;
 
     @Column(length = 11, 
             name = "rg", 
@@ -72,6 +72,56 @@ public class CollaboratorsModel {
     @ManyToOne
     @JoinColumn(name = "id_adresses")
     private AdressesModel adresses;
+
+    public CollaboratorsModel() {}
+
+    public CollaboratorsModel(
+        String firstName,
+        String lastName,
+        String personalEmail,
+        String busiessEmail,
+        Long cellPhone,
+        Date dateOfBirth,
+        Long cpf,
+        Integer rg,
+        Boolean status,
+        RolesModel role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personalEmail = personalEmail;
+        this.busiessEmail = busiessEmail;
+        this.cellPhone = cellPhone;
+        this.dateOfBirth = dateOfBirth;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.status = status;
+        this.role = role;
+    }
+
+    public CollaboratorsModel(
+        Integer id,
+        String firstName,
+        String lastName,
+        String personalEmail,
+        String busiessEmail,
+        Long cellPhone,
+        Date dateOfBirth,
+        Long cpf,
+        Integer rg,
+        Boolean status,
+        RolesModel role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personalEmail = personalEmail;
+        this.busiessEmail = busiessEmail;
+        this.cellPhone = cellPhone;
+        this.dateOfBirth = dateOfBirth;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.status = status;
+        this.role = role;
+    }
 
     public AdressesModel getAdresses() {
         return adresses;
@@ -121,11 +171,11 @@ public class CollaboratorsModel {
         this.busiessEmail = busiessEmail;
     }
 
-    public Integer getCellPhone() {
+    public Long getCellPhone() {
         return cellPhone;
     }
 
-    public void setCellPhone(Integer cellPhone) {
+    public void setCellPhone(Long cellPhone) {
         this.cellPhone = cellPhone;
     }
 
@@ -137,11 +187,11 @@ public class CollaboratorsModel {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Integer getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(Integer cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 
