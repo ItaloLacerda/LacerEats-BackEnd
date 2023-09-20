@@ -23,30 +23,30 @@ public class ProductGroupsController {
     private ProductGroupService productGroupService;
     
     @GetMapping
-    public List<ProductGroupsDTO> searchAllRoles(){
+    public List<ProductGroupsDTO> searchAll(){
         return productGroupService.searchAll();
     }
 
     @PostMapping
-    public void registerRole(@RequestBody ProductGroupsDTO ProductGroup) {
+    public void register(@RequestBody ProductGroupsDTO ProductGroup) {
         productGroupService.create(ProductGroup);
         return;
     }
 
     @GetMapping("/{id}")
-    public ProductGroupsDTO searchRoleById(@PathVariable Integer id) {
+    public ProductGroupsDTO searchById(@PathVariable Integer id) {
         return productGroupService.searchById(id);
     }
 
 
     @PutMapping
-    public void updateRole(@RequestBody ProductGroupsDTO productGroup) {
+    public void update(@RequestBody ProductGroupsDTO productGroup) {
         productGroupService.update(productGroup);
         return;
     }
 
     @DeleteMapping("/{id}")
-    public void deleteRole(@PathVariable Integer id) {
+    public void delete(@PathVariable Integer id) {
         productGroupService.delete(id);
         return;
     }
