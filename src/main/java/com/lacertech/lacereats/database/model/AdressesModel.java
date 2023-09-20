@@ -31,6 +31,32 @@ public class AdressesModel {
     @Column(length = 2, nullable = false)
     private String state;
 
+    public AdressesModel() {}
+
+    public AdressesModel(String zipCode, String city, String publicPlace, String neighborhood, String state) {
+        this.zipCode = zipCode;
+        this.city = city;
+        this.publicPlace = publicPlace;
+        this.neighborhood = neighborhood;
+        this.state = state;
+    }
+
+    public AdressesModel(
+        Integer id, 
+        String zipCode, 
+        String city, 
+        String publicPlace, 
+        String neighborhood,
+        String state
+        ) {
+        this.id = id;
+        this.zipCode = zipCode;
+        this.city = city;
+        this.publicPlace = publicPlace;
+        this.neighborhood = neighborhood;
+        this.state = state;
+    }
+
     public Integer getId() {
         return id;
     }
