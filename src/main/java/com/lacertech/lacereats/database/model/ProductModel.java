@@ -40,11 +40,41 @@ public class ProductModel {
     private Boolean status;
 
     @ManyToOne
-    @JoinColumn(name = "id_product_group")
+    @JoinColumn(name = "id_product_group", nullable = false)
     private ProductGroupModel productGroup;
 
     @ManyToMany(mappedBy = "products")
     private Set<SuppliersModel> suppliers;
+
+    public ProductModel() {}
+
+    public ProductModel(
+        String description,
+        String barCode,
+        Float costPrice,
+        Float salePrice,
+        ProductGroupModel productGroup,
+        Boolean status
+        ) {
+        this.description = description;
+        this.barCode = barCode;
+        this.costPrice = costPrice;
+        this.salePrice = salePrice;
+        this.productGroup = productGroup;
+        this.status = status;    
+    }
+
+    public ProductModel(Integer id, String description, String ncm,String barCode, Float costPrice, Float salePrice,
+            ProductGroupModel productGroup, Boolean status) {
+        this.id = id;
+        this.description = description;
+        this.ncm = ncm;
+        this.barCode = barCode;
+        this.costPrice = costPrice;
+        this.salePrice = salePrice;
+        this.productGroup = productGroup;
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;
