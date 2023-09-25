@@ -10,5 +10,5 @@ public interface CommonController<ResponseDTO, DTO> {
     ResponseEntity<ResponseDTO> register(DTO dto);
     ResponseEntity<ResponseDTO> searchById(Integer id);
     ResponseEntity<ResponseDTO> update(Integer id, DTO dto);
-    ResponseEntity<Void> deleteRole(Integer id);
+    ResponseEntity<Void> delete(Integer id);
 }
