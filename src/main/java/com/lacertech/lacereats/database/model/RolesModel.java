@@ -24,18 +24,8 @@ public class RolesModel {
     
     public RolesModel() {}
 
-    public RolesModel(Integer id, String role) {
-        this.id = id;
-        this.role = role; 
-    }
-
     public RolesModel(String role, boolean status) {
         this.role = role;
-        this.status = status;
-    }
-
-    public RolesModel(Integer id, Boolean status) {
-        this.id = id;
         this.status = status;
     }
 
