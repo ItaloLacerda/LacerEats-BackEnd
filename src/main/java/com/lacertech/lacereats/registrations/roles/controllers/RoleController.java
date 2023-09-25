@@ -3,7 +3,6 @@ package com.lacertech.lacereats.registrations.roles.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lacertech.lacereats.controllers.interfaces.CommonController;
-import com.lacertech.lacereats.database.model.RolesModel;
 import com.lacertech.lacereats.dto.rolesDTO.RoleDTO;
 import com.lacertech.lacereats.dto.rolesDTO.RoleResponseDTO;
 import com.lacertech.lacereats.registrations.roles.services.RoleService;
@@ -52,7 +51,7 @@ public class RoleController implements CommonController<RoleResponseDTO, RoleDTO
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRole(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         roleService.delete(id);
         return ResponseEntity.noContent().build();
     }
