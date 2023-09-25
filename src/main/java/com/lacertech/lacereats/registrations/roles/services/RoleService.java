@@ -9,56 +9,70 @@ import org.springframework.stereotype.Service;
 import com.lacertech.lacereats.database.model.RolesModel;
 import com.lacertech.lacereats.database.repository.RoleRepository;
 import com.lacertech.lacereats.dto.rolesDTO.RoleDTO;
+import com.lacertech.lacereats.dto.rolesDTO.RoleResponseDTO;
+import com.lacertech.lacereats.exceptions.ExistingAttributeException;
+import com.lacertech.lacereats.exceptions.IdNotFoundException;
+import com.lacertech.lacereats.services.interfaces.CommonService;
+
+import lombok.Getter;
 
 @Service
-public class RoleService {
-    
+@Getter
+public class RoleService implements CommonService<RoleResponseDTO, RoleDTO> {
+
     @Autowired
     private RoleRepository roleRepository;
 
-    public void postRole(String role) {
-        RolesModel roleData = new RolesModel(role, true);
-        roleRepository.save(roleData);
-        return;
+    private final String objectName;
+    private final String idNotFoundMensage;
+
+    private RoleService() {
+        objectName = "RoleService";
+        idNotFoundMensage = "Id not found, please enter a valid id.";
     }
 
-    public List<RoleDTO> getRole() {
+    public RoleResponseDTO post(RoleDTO role) {
+        if (!roleRepository.existsByRole(role.role())) {
+            RolesModel roleData = new RolesModel(role.role(), role.status());
+            return RoleResponseDTO.turnsIntoDTO(roleRepository.save(roleData));
+        } else {
+            throw new ExistingAttributeException("Role in use, please enter a new value.", objectName, "role");
+        }
+    }
+
+    public List<RoleResponseDTO> searchAll() {
         List<RolesModel> listRoles = roleRepository.findAll();
         return listRoles.stream()
-                        .map( RoleDTO::new)
+                        .map( RoleResponseDTO::new)
                         .collect(Collectors.toList());
     }
 
-    public RoleDTO searchRoleById(Integer id) {
-        
-        return new RoleDTO(roleRepository.findById(id).get());
+    public RoleResponseDTO searchById(Integer id) {
+        if(roleRepository.existsById(id)) {
+            return new RoleResponseDTO(roleRepository.findById(id).get());
+        } else {
+            throw new IdNotFoundException(idNotFoundMensage, objectName);
+        }
     }
 
-    public void updateRole(RoleDTO role) {
-        RolesModel roleData = new RolesModel(role.id(), role.role(), role.status());
-        roleRepository.save(roleData);
-        return;
+    public RoleResponseDTO update(Integer id, RoleDTO role) {
+        if(roleRepository.existsById(id)) {
+            if(!roleRepository.existsByRole(role.role())) {
+                RolesModel roleData = new RolesModel(id, role.role(), role.status());
+                return RoleResponseDTO.turnsIntoDTO(roleRepository.save(roleData)); 
+            } else {
+                throw new ExistingAttributeException("Role in use, please enter a new value.", objectName, "role");
+            }
+        } else {
+            throw new IdNotFoundException(idNotFoundMensage, objectName);
+        }
     }
 
-    
-    public void updateRole(Integer id, Boolean status) {
-        RoleDTO role = searchRoleById(id);
-
-        RolesModel roleData = new RolesModel(id, role.role() ,status);
-        roleRepository.save(roleData);
-        return;
-    }
-
-    public void updateRole(Integer id, String newRole) {
-        RoleDTO role = searchRoleById(id);
-
-        RolesModel roleData = new RolesModel(id, newRole, role.status());
-        roleRepository.save(roleData);
-        return;
-    }
-    
-    public void deleteRole(Integer id) {
-        roleRepository.deleteById(id);
-        return;
+    public void delete(Integer id) {
+        if (roleRepository.existsById(id)){
+            roleRepository.deleteById(id);
+        } else {
+            throw new IdNotFoundException(idNotFoundMensage, objectName);
+        }
     }
 }
