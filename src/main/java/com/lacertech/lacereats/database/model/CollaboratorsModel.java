@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
+import lombok.Getter;
 
 /**
  * This class represents a collaborator model entity.
@@ -18,6 +19,7 @@ import java.util.Date;
  * @since 2.0 
  */
 @Entity
+@Getter
 @Table(name = "collaborators")
 public class CollaboratorsModel {
     

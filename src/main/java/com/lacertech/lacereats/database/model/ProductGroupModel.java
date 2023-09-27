@@ -6,88 +6,79 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
+/**
+ * This class represents a product group model entity.
+ * It is used to store information about product groups in the application.
+ *
+ * @author Italo Lacerda
+ * @since 2.0
+ */
 @Entity
+@Getter
 @Table(name = "product_group")
 public class ProductGroupModel {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_product_group")
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id_product_group")
+  private Integer id;
 
-    @Column(length = 45, nullable = false, unique = true)
-    private String description;
+  @Column(length = 45, nullable = false, unique = true)
+  private String description;
 
-    @Column(name = "show_in_mobile", nullable = false)
-    private Boolean showInMobile;
+  @Column(name = "show_in_mobile", nullable = false)
+  private Boolean showInMobile;
 
-    @Column(name = "show_in_terminal", nullable = false)
-    private Boolean showInTerminal;
+  @Column(name = "show_in_terminal", nullable = false)
+  private Boolean showInTerminal;
 
-    @Column(nullable = false)
-    private Boolean status;
+  @Column(nullable = false)
+  private Boolean status;
 
-    public ProductGroupModel() {}
+  public ProductGroupModel() {}
 
-    public ProductGroupModel(String description, Boolean showInMobile, Boolean showInTerminal, boolean status) {
-        this.description = description;
-        this.showInMobile = showInMobile;
-        this.showInTerminal = showInTerminal;
-        this.status = status;
-    }
+  /**
+   * Constructor for creating a new product group.
+   *
+   * @param description    The description of the product group.
+   * @param showInMobile   Indicates whether the product group is shown in the mobile application.
+   * @param showInTerminal Indicates whether the product group is shown in the terminal application.
+   * @param status         The status of the product group.
+   */
+  public ProductGroupModel(
+      String description,
+      Boolean showInMobile,
+      Boolean showInTerminal,
+      boolean status
+  ) {
+    this.description = description;
+    this.showInMobile = showInMobile;
+    this.showInTerminal = showInTerminal;
+    this.status = status;
+  }
 
-    public ProductGroupModel(
-        Integer id,
-        String description,
-        Boolean showInMobile,
-        Boolean showInTerminal,
-        Boolean status) {
-            
-        this.id = id;
-        this.description = description;
-        this.showInMobile = showInMobile;
-        this.showInTerminal = showInTerminal;
-        this.status = status;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getShowInMobile() {
-        return showInMobile;
-    }
-
-    public void setShowInMobile(Boolean showInMobile) {
-        this.showInMobile = showInMobile;
-    }
-
-    public Boolean getShowInTerminal() {
-        return showInTerminal;
-    }
-
-    public void setShowInTerminal(Boolean showInTerminal) {
-        this.showInTerminal = showInTerminal;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+  /**
+   * Constructor for creating a product group with an existing ID.
+   *
+   * @param id             The unique identifier for the product group.
+   * @param description    The description of the product group.
+   * @param showInMobile   Indicates whether the product group is shown in the mobile application.
+   * @param showInTerminal Indicates whether the product group is shown in the terminal application.
+   * @param status         The status of the product group.
+   */
+  public ProductGroupModel(
+      Integer id,
+      String description,
+      Boolean showInMobile,
+      Boolean showInTerminal,
+      Boolean status
+  ) {
+    this.id = id;
+    this.description = description;
+    this.showInMobile = showInMobile;
+    this.showInTerminal = showInTerminal;
+    this.status = status;
+  }
 }
