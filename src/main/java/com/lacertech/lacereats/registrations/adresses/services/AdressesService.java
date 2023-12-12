@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lacertech.lacereats.database.model.AdressesModel;
 import com.lacertech.lacereats.database.repository.AdressesRepository;
 import com.lacertech.lacereats.dto.adressesDTO.AdressesDTO;
+import com.lacertech.lacereats.dto.adressesDTO.AdressesResponseDto;
 
 
 
@@ -18,39 +19,40 @@ public class AdressesService {
     @Autowired
     private AdressesRepository adressesRepository;
 
-    public void create(AdressesDTO adressesDTO) {
+    public AdressesResponseDto create(AdressesDTO adressesDTO) {
         AdressesModel data = new AdressesModel(
             adressesDTO.zipCode(), 
             adressesDTO.city(), 
             adressesDTO.publicPlace(), 
             adressesDTO.neighborhood(), 
             adressesDTO.state());
-            adressesRepository.save(data);
+            
+            return AdressesResponseDto.turnsIntoDto(adressesRepository.save(data));
         }
     
 
-    public List<AdressesDTO> searchAll() {
+    public List<AdressesResponseDto> searchAll() {
         List<AdressesModel> listAdresse = adressesRepository.findAll();
         return listAdresse.stream()
-                           .map(AdressesDTO::new)
+                           .map(AdressesResponseDto::new)
                            .collect(Collectors.toList());
     }
 
-    public AdressesDTO searchById(Integer id) {
+    public AdressesResponseDto searchById(Integer id) {
         
-        return new AdressesDTO(adressesRepository.findById(id).get());
+        return new AdressesResponseDto(adressesRepository.findById(id).get());
     }
 
-    public void update(AdressesDTO adressesDTO) {
+    public AdressesResponseDto update(Integer id, AdressesDTO adresses) {
         AdressesModel adresseData = new AdressesModel(
-            adressesDTO.id(),
-            adressesDTO.zipCode(),
-            adressesDTO.city(),
-            adressesDTO.publicPlace(),
-            adressesDTO.neighborhood(),
-            adressesDTO.state());
-        adressesRepository.save(adresseData);
-        return;
+            id,
+            adresses.zipCode(),
+            adresses.city(),
+            adresses.publicPlace(),
+            adresses.neighborhood(),
+            adresses.state());
+        
+        return AdressesResponseDto.turnsIntoDto(adressesRepository.save(adresseData));
     }
 
     public void delete(Integer id) {
