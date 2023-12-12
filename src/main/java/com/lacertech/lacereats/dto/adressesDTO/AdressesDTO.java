@@ -1,4 +1,4 @@
-package com.lacertech.lacereats.dto.adresses;
+package com.lacertech.lacereats.dto.adressesDTO;
 
 import com.lacertech.lacereats.database.model.AdressesModel;
 import jakarta.validation.constraints.NotBlank;
@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Size;
  * @author Italo Lacerda
  * @since 2.0
  */
-public record AdressesDto(
+public record AdressesDTO(
     
     @NotBlank(message = "{zipCode.not.blank}")
     @Size(max = 8, min = 8, message = "{zipCode.size}")
@@ -35,7 +35,7 @@ public record AdressesDto(
    *
    * @param adresses The AdressesModel from which to create the DTO.
    */
-  public AdressesDto(AdressesModel adresses) {
+  public AdressesDTO(AdressesModel adresses) {
     this(adresses.getZipCode(),
         adresses.getCity(),
         adresses.getPublicPlace(),
